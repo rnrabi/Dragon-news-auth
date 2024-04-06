@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import Navber from "../../components/shared/Navber";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AuthContext } from "../../authContext/ContextApi";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
 const Login = () => {
-
-    const { loginUser } = useContext(AuthContext)
+    const emailRef = useRef()
+    // console.log(emailRef.current.value)
+    const { loginUser, resetPassword } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     // console.log(location)
@@ -25,6 +26,16 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error.message)
+            })
+    }
+    const handlePasswordReset = () => {
+        const email = emailRef.current.value;
+        resetPassword(email)
+            .then(() => {
+                alert('check your email')
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
@@ -45,25 +56,25 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                                <input ref={emailRef} type="email" name="email" placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" 
-                                name="password" placeholder="password" className="input input-bordered" required />
+                                <input type="password"
+                                    name="password" placeholder="password" className="input input-bordered" required />
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <a onClick={handlePasswordReset} href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Login</button>
                             </div>
-                            <p>Do not have an account <Link 
-                            to='/register' className="text-blue-500">Register</Link> </p>
+                            <p>Do not have an account <Link
+                                to='/register' className="text-blue-500">Register</Link> </p>
                         </form>
-                       
+
 
                     </div>
                 </div>
