@@ -10,7 +10,7 @@ import FindUs from "../../components/shared/findUs/FindUs";
 
 const Home = () => {
  const news = useLoaderData()
- console.log(news)
+//  console.log(news)
 
 
 

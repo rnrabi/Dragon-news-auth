@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import Navber from "../../components/shared/Navber";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext/ContextApi";
@@ -6,6 +6,7 @@ import { AuthContext } from "../../authContext/ContextApi";
 
 const Register = () => {
     const { signUpUser } = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleSignUp = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -17,6 +18,7 @@ const Register = () => {
         signUpUser(email, password)
             .then(result => {
                 console.log(result.user)
+                navigate('/')
             })
             .catch(error => {
                 console.log(error.message)
