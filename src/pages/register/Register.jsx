@@ -2,10 +2,12 @@ import { Link , useNavigate} from "react-router-dom";
 import Navber from "../../components/shared/Navber";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext/ContextApi";
+import { sendEmailVerification } from "firebase/auth";
+
 
 
 const Register = () => {
-    const { signUpUser } = useContext(AuthContext)
+    const { signUpUser  } = useContext(AuthContext)
     const navigate = useNavigate()
     const handleSignUp = (e) => {
         e.preventDefault()
@@ -15,10 +17,26 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(name, photo , email, password)
+
+        
         signUpUser(email, password)
             .then(result => {
                 console.log(result.user)
-                navigate('/')
+                sendEmailVerification(result.user)
+                .then(()=>{
+                    // email verified korar por kn home page a jay na . ata support session a q korte hobe , 
+                    // if(!result.user?.emailVerified){
+                    //     alert('check your email and verify')
+                    //     navigate('/register')
+                    
+                    // }
+                    // else{
+                    //     navigate('/')
+                    // }
+                  
+                    navigate('/')
+                    
+                })
             })
             .catch(error => {
                 console.log(error.message)
