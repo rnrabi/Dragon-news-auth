@@ -20,7 +20,7 @@ const Navber = () => {
 
         <li><NavLink to="/career" className={({ isActive }) => isActive ? 'text-green-600 underline' : ''}>Career</NavLink></li>
         <li><NavLink to="/register" className={({ isActive }) => isActive ? 'text-green-600 underline' : ''}>Register</NavLink></li>
-        <li><NavLink to="/order" className={({ isActive }) => isActive ? 'text-green-600 underline' : ''}>Order</NavLink></li>
+        <li><NavLink to="/user" className={({ isActive }) => isActive ? 'text-green-600 underline' : ''}>User</NavLink></li>
 
     </>
 

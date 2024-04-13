@@ -10,8 +10,8 @@ import Error from "./pages/error/Error";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Details from "./pages/details/Details";
-import Order from "./pages/order/Order";
 import PrivateRoute from "./components/shared/private/PrivateRoute";
+import User from "./pages/order/User";
 
 export const router = createBrowserRouter([
     {
@@ -41,8 +41,9 @@ export const router = createBrowserRouter([
           element:<Register></Register>
         },
         {
-          path:'/order',
-          element:<PrivateRoute><Order></Order></PrivateRoute>
+          path:'/user',
+          element:<PrivateRoute><User></User></PrivateRoute>,
+          loader:()=>fetch('http://localhost:5000/user')
         }
 
       ]
